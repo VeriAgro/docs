@@ -1,9 +1,12 @@
+# API
 A fim de facilitar a implementação com serviços externos, a VeriAgro fornece uma API. A seguir são os endpoints da API.
 
 ## Dados gerais
 
 Versão atual: v0.1.0
+
 Linguagem de programação do backend atual: Typescript
+
 URL base da API: https://sra-system-backend-999646529726.southamerica-east1.run.app/
 
 > [!NOTE]\
@@ -14,7 +17,7 @@ URL base da API: https://sra-system-backend-999646529726.southamerica-east1.run.
 #### GET /
 ---
 ###### Resposta:
-```json
+```
 Hello World!
 ```
 ## Criação
@@ -199,8 +202,24 @@ Retorna todos os eventos cadastrados a um animal
       "type_number":1,
       "description":"Ela foi vacinada bem direitinho",
       "date":"2025-02-11T22:58:00.000Z",
-      "animal":"67ac001d27f4da090d87e3b0",
-      "location":"67abff5a27f4da090d87e3ac",
+      "animal":{
+         "_id":"67ae6d7f5ef34c6be30e9efe",
+         "name":"O nome do animal",
+         "birth_date":"2025-02-11T00:00:00.000Z",
+         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
+         "sex":"M ou F",
+         "breed":"A raça do animal",
+         "register_date":"2025-02-13T22:09:03.936Z",
+         "__v":0
+      },
+      "location":{
+         "_id":"67ae6bcf5ef34c6be30e9ef9",
+         "name":"O nome do local",
+         "description":"Uma descrição do local",
+         "latitude":-1.234567,
+         "longitude":12.345678,
+         "__v":0
+      },
       "__v":0
    },
    {
@@ -208,8 +227,24 @@ Retorna todos os eventos cadastrados a um animal
       "type_number":3,
       "description":"Peso final: 70kg",
       "date":"2025-02-11T22:59:00.000Z",
-      "animal":"67ac001d27f4da090d87e3b0",
-      "location":"67abff5a27f4da090d87e3ac",
+      "animal":{
+         "_id":"67ae6d7f5ef34c6be30e9efe",
+         "name":"O nome do animal",
+         "birth_date":"2025-02-11T00:00:00.000Z",
+         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
+         "sex":"M ou F",
+         "breed":"A raça do animal",
+         "register_date":"2025-02-13T22:09:03.936Z",
+         "__v":0
+      },
+      "location":{
+         "_id":"67ae6bcf5ef34c6be30e9ef9",
+         "name":"O nome do local",
+         "description":"Uma descrição do local",
+         "latitude":-1.234567,
+         "longitude":12.345678,
+         "__v":0
+      },
       "__v":0
    },
    {
@@ -217,8 +252,24 @@ Retorna todos os eventos cadastrados a um animal
       "type_number":4,
       "description":"Exemplo de um registro, com um texto qualquer",
       "date":"2025-02-11T22:59:00.000Z",
-      "animal":"67ac001d27f4da090d87e3b0",
-      "location":"67abff5a27f4da090d87e3ac",
+      "animal":{
+         "_id":"67ae6d7f5ef34c6be30e9efe",
+         "name":"O nome do animal",
+         "birth_date":"2025-02-11T00:00:00.000Z",
+         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
+         "sex":"M ou F",
+         "breed":"A raça do animal",
+         "register_date":"2025-02-13T22:09:03.936Z",
+         "__v":0
+      },
+      "location":{
+         "_id":"67ae6bcf5ef34c6be30e9ef9",
+         "name":"O nome do local",
+         "description":"Uma descrição do local",
+         "latitude":-1.234567,
+         "longitude":12.345678,
+         "__v":0
+      },
       "__v":0
    }
 ]
