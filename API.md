@@ -3,7 +3,7 @@ A fim de facilitar a implementação com serviços externos, a VeriAgro fornece 
 
 ## Dados gerais
 
-Versão atual: v0.1.0
+Versão atual: v0.1.1
 
 Linguagem de programação do backend atual: Typescript
 
