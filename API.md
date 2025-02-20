@@ -3,15 +3,18 @@ A fim de facilitar a implementação com serviços externos, a VeriAgro fornece 
 
 ## Dados gerais
 
-Versão atual: v0.1.1
+Versão atual: v0.2.0
 
 Linguagem de programação do backend atual: Typescript
 
-URL base da API: https://sra-system-backend-999646529726.southamerica-east1.run.app/
+URL base da API: https://api.veriagro.com.br/
 
 > [!NOTE]\
 > A API ainda está em no começo do desenvolvimento. Dados gerais sujeitos a mudança.
- 
+
+> [!WARNING]\
+> Exceto pelos campos 'descrição', todos os campos devem ter até no máximo 32 caracteres.
+
 # Endpoints
 ## Teste de conexão
 #### GET /
@@ -27,102 +30,77 @@ Hello World!
 ###### Exemplo:
 ```json
 {
-  "name": "O nome do local",
-  "description": "Uma descrição do local",
-  "latitude" : -1.234567,
-  "longitude": 12.345678
-}
+    "name": "O nome do local",
+    "description": "A descrição do local",
+    "latitude": "40.7128",
+    "longitude": "-74.0060"
+  }
 ```
 ###### Resposta:
 ```json
 {
-   "name":"O nome do local",
-   "description":"Uma descrição do local",
-   "latitude":-1.234567,
-   "longitude":12.345678,
-   "_id":"67ae6bcf5ef34c6be30e9ef9",
-   "__v":0
+   "id":"0xa284a5f8a329e42a271A55a7A1F0142170F821Ea",
+   "name": "O nome do local",
+    "description": "A descrição do local",
+    "latitude": "40.7128",
+    "longitude": "-74.0060"
 }
 ```
 #### POST /animal
 ---
-É o endpoint de criação / cadastro de animal.
+É o endpoint de criação / cadastro de animal. O sexo é um booleano, sendo true para macho e false para fêmea.
 ###### Exemplo:
 ```json
 {
-  "name": "O nome do animal",
-  "birth_date": "2025-02-11T00:00:00.000Z",
-  "birth_location": "Um id de local de nascimento",
-  "sex": "M ou F",
-  "breed": "A raça do animal"
-}
+    "name": "Nome do animal",
+    "sex": true,
+    "breed": "Raça do animal"
+  }
 ```
 ###### Resposta:
 ```json
 {
-   "name":"O nome do animal",
-   "birth_date":"2025-02-11T00:00:00.000Z",
-   "birth_location":{
-      "_id":"67ae6bcf5ef34c6be30e9ef9",
-      "name":"O nome do local",
-      "description":"Uma descrição do local",
-      "latitude":-1.234567,
-      "longitude":12.345678,
-      "__v":0
-   },
-   "sex":"M ou F",
-   "breed":"A raça do animal",
-   "register_date":"2025-02-13T22:09:03.936Z",
-   "_id":"67ae6d7f5ef34c6be30e9efe",
-   "__v":0
+    "id": "0xc28BD2ecDdBD727CEED0764d0Cda1629C10Adc10",
+    "name": "Nome do animal",
+    "sex": true,
+    "breed": "Raça do animal"
 }
 ```
 #### POST /event
 ---
 É o endpoint de criação / cadastro de evento.
 
-O tipo é um número de 1-4, sendo: 
+O tipo é um número de 0-4, sendo:
 
+NASCIMENTO = 0,
 VACINACAO = 1,
 MOVIMENTO = 2,
 ABATE = 3,
-REGISTRO = 4,
+REGISTRO = 4
+
+> [!WARNING]\
+> Na versão v0.2.1, o id também será retornado
+
 ###### Exemplo:
 ```json
 {
-   "type_number": 1,
-   "description": "Exemplo com vacinação de animal. Mais informações vão aqui",
-   "date": "2025-02-12T00:00:00.000Z",
-   "animal_id": "67ae6d7f5ef34c6be30e9efe",
-   "location_id": "67ae6bcf5ef34c6be30e9ef9"
+    "typeNumber": 1,
+    "description": "Descrição do evento, como a vacinação",
+    "date": 1739931426,
+    "animalId": "0xc28BD2ecDdBD727CEED0764d0Cda1629C10Adc10",
+    "locationId": "0xa284a5f8a329e42a271A55a7A1F0142170F821Ea",
+    "weight": 100
 }
 ```
 ###### Resposta:
 ```json
 {
-   "type_number":1,
-   "description":"Exemplo com vacinação de animal. Mais informações vão aqui",
-   "date":"2025-02-12T00:00:00.000Z",
-   "animal":{
-      "_id":"67ae6d7f5ef34c6be30e9efe",
-      "name":"O nome do animal",
-      "birth_date":"2025-02-11T00:00:00.000Z",
-      "birth_location":"67ae6bcf5ef34c6be30e9ef9",
-      "sex":"M ou F",
-      "breed":"A raça do animal",
-      "register_date":"2025-02-13T22:09:03.936Z",
-      "__v":0
-   },
-   "location":{
-      "_id":"67ae6bcf5ef34c6be30e9ef9",
-      "name":"O nome do local",
-      "description":"Uma descrição do local",
-      "latitude":-1.234567,
-      "longitude":12.345678,
-      "__v":0
-   },
-   "_id":"67ae71d2e9a33e5b883475da",
-   "__v":0
+    "typeNumber": 1,
+    "description": "Descrição do evento, como a vacinação",
+    "date": 1739931426,
+    "animalId": "0xc28BD2ecDdBD727CEED0764d0Cda1629C10Adc10",
+    "locationId": "0xa284a5f8a329e42a271A55a7A1F0142170F821Ea",
+    "weight": 100
 }
 ```
 ## Leitura
@@ -131,12 +109,10 @@ REGISTRO = 4,
 ###### Resposta:
 ```json
 {
-   "name":"O nome do local",
-   "description":"Uma descrição do local",
-   "latitude":-1.234567,
-   "longitude":12.345678,
-   "_id":"67ae6bcf5ef34c6be30e9ef9",
-   "__v":0
+    "name": "O nome do local",
+    "description": "A descrição do local",
+    "latitude": "40.7128",
+    "longitude": "-74.0060"
 }
 ```
 #### GET /animal/{id}
@@ -144,135 +120,34 @@ REGISTRO = 4,
 ###### Resposta:
 ```json
 {
-   "name":"O nome do animal",
-   "birth_date":"2025-02-11T00:00:00.000Z",
-   "birth_location":{
-      "_id":"67ae6bcf5ef34c6be30e9ef9",
-      "name":"O nome do local",
-      "description":"Uma descrição do local",
-      "latitude":-1.234567,
-      "longitude":12.345678,
-      "__v":0
-   },
-   "sex":"M ou F",
-   "breed":"A raça do animal",
-   "register_date":"2025-02-13T22:09:03.936Z",
-   "_id":"67ae6d7f5ef34c6be30e9efe",
-   "__v":0
+    "name": "Nome do animal",
+    "sex": true,
+    "breed": "Raça do animal"
 }
 ```
 #### GET /event/{id}
 ---
 ###### Resposta:
-```json
-{
-   "type_number":1,
-   "description":"Exemplo com vacinação de animal. Mais informações vão aqui",
-   "date":"2025-02-12T00:00:00.000Z",
-   "animal":{
-      "_id":"67ae6d7f5ef34c6be30e9efe",
-      "name":"O nome do animal",
-      "birth_date":"2025-02-11T00:00:00.000Z",
-      "birth_location":"67ae6bcf5ef34c6be30e9ef9",
-      "sex":"M ou F",
-      "breed":"A raça do animal",
-      "register_date":"2025-02-13T22:09:03.936Z",
-      "__v":0
-   },
-   "location":{
-      "_id":"67ae6bcf5ef34c6be30e9ef9",
-      "name":"O nome do local",
-      "description":"Uma descrição do local",
-      "latitude":-1.234567,
-      "longitude":12.345678,
-      "__v":0
-   },
-   "_id":"67ae71d2e9a33e5b883475da",
-   "__v":0
-}
-```
+> [!WARNING]\
+> Estará disponível na versão v0.2.1
+
 #### GET /events/animal{id}
 ---
 Retorna todos os eventos cadastrados a um animal
 ###### Resposta:
 ```json
 [
-   {
-      "_id":"67ac007d27f4da090d87e3b4",
-      "type_number":1,
-      "description":"Ela foi vacinada bem direitinho",
-      "date":"2025-02-11T22:58:00.000Z",
-      "animal":{
-         "_id":"67ae6d7f5ef34c6be30e9efe",
-         "name":"O nome do animal",
-         "birth_date":"2025-02-11T00:00:00.000Z",
-         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
-         "sex":"M ou F",
-         "breed":"A raça do animal",
-         "register_date":"2025-02-13T22:09:03.936Z",
-         "__v":0
-      },
-      "location":{
-         "_id":"67ae6bcf5ef34c6be30e9ef9",
-         "name":"O nome do local",
-         "description":"Uma descrição do local",
-         "latitude":-1.234567,
-         "longitude":12.345678,
-         "__v":0
-      },
-      "__v":0
-   },
-   {
-      "_id":"67ac00c627f4da090d87e3b8",
-      "type_number":3,
-      "description":"Peso final: 70kg",
-      "date":"2025-02-11T22:59:00.000Z",
-      "animal":{
-         "_id":"67ae6d7f5ef34c6be30e9efe",
-         "name":"O nome do animal",
-         "birth_date":"2025-02-11T00:00:00.000Z",
-         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
-         "sex":"M ou F",
-         "breed":"A raça do animal",
-         "register_date":"2025-02-13T22:09:03.936Z",
-         "__v":0
-      },
-      "location":{
-         "_id":"67ae6bcf5ef34c6be30e9ef9",
-         "name":"O nome do local",
-         "description":"Uma descrição do local",
-         "latitude":-1.234567,
-         "longitude":12.345678,
-         "__v":0
-      },
-      "__v":0
-   },
-   {
-      "_id":"67ac017527f4da090d87e3bc",
-      "type_number":4,
-      "description":"Exemplo de um registro, com um texto qualquer",
-      "date":"2025-02-11T22:59:00.000Z",
-      "animal":{
-         "_id":"67ae6d7f5ef34c6be30e9efe",
-         "name":"O nome do animal",
-         "birth_date":"2025-02-11T00:00:00.000Z",
-         "birth_location":"67ae6bcf5ef34c6be30e9ef9",
-         "sex":"M ou F",
-         "breed":"A raça do animal",
-         "register_date":"2025-02-13T22:09:03.936Z",
-         "__v":0
-      },
-      "location":{
-         "_id":"67ae6bcf5ef34c6be30e9ef9",
-         "name":"O nome do local",
-         "description":"Uma descrição do local",
-         "latitude":-1.234567,
-         "longitude":12.345678,
-         "__v":0
-      },
-      "__v":0
-   }
+  {
+    "eventType": "1",
+    "description": "Descrição do evento, como a vacinação",
+    "date": 1739931426,
+    "weight": 100,
+    "location": {
+        "name": "O nome do local",
+        "description": "A descrição do local",
+        "latitude": "40.7128",
+        "longitude": "-74.0060"
+    }
+  }
 ]
 ```
-
-
